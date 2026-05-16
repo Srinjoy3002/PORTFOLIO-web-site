@@ -1428,29 +1428,35 @@
         // FIREBASE CONFIGURATION
         // ========================================
         const firebaseConfig = {
-            apiKey: "AIzaSyDpjUw54ZNeq8Iuh5q_7ecqgNNcRvuq8d8",
-            authDomain: "srinjoy-portfolio.firebaseapp.com",
-            databaseURL: "https://srinjoy-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app/",
-            projectId: "srinjoy-portfolio",
-            storageBucket: "srinjoy-portfolio.firebasestorage.app",
-            messagingSenderId: "1073488416549",
-            appId: "1:1073488416549:web:50ba940d2fa8d1aa3fd4cc"
+            apiKey: "PLACEHOLDER_API_KEY",
+            authDomain: "PLACEHOLDER_AUTH_DOMAIN",
+            databaseURL: "PLACEHOLDER_DATABASE_URL",
+            projectId: "PLACEHOLDER_PROJECT_ID",
+            storageBucket: "PLACEHOLDER_STORAGE_BUCKET",
+            messagingSenderId: "PLACEHOLDER_MESSAGING_SENDER_ID",
+            appId: "PLACEHOLDER_APP_ID"
         };
 
         // Initialize Firebase with Safety Try-Catch
         let database;
         try {
-            // Diagnostic Logs (Safe: Only logs status/length, not the actual secret)
-            console.log("Firebase Injection Check:");
-            console.log("- API Key Injected:", firebaseConfig.apiKey !== "AIzaSyDpjUw54ZNeq8Iuh5q_7ecqgNNcRvuq8d8");
-            console.log("- DB URL Injected:", firebaseConfig.databaseURL !== "https://srinjoy-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app/");
-            console.log("- DB URL Value:", firebaseConfig.databaseURL); // Helpful to see if it's the right region URL
+            // High-Visibility Diagnostic Logs
+            console.log("=== FIREBASE DIAGNOSTIC ===");
+            const isDefault = (val, key) => val.includes("PLACEHOLDER") || val === "";
+            
+            console.log("API Key Status:", isDefault(firebaseConfig.apiKey) ? "❌ MISSING" : "✅ LOADED");
+            console.log("DB URL Status:", isDefault(firebaseConfig.databaseURL) ? "❌ MISSING" : "✅ LOADED");
+            console.log("Target URL:", firebaseConfig.databaseURL);
+
+            if (isDefault(firebaseConfig.apiKey)) {
+                throw new Error("Credentials not injected. Check GitHub Secrets and Actions log.");
+            }
 
             firebase.initializeApp(firebaseConfig);
             database = firebase.database();
-            console.log("Firebase initialized successfully.");
+            console.log("Firebase status: Connected.");
         } catch (e) {
-            console.warn("Firebase failed to initialize. Check your GitHub Secrets.", e);
+            console.error("Firebase Connection Failed:", e.message);
         }
 
         // ========================================
