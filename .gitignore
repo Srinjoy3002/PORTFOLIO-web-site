@@ -1,0 +1,11 @@
+# Ignore the Admin Dashboard for security
+admin.html
+
+# Ignore any local memory or temp files
+claudecode/
+.gemini/
+MEMORY.md
+GEMINI.md
+agent.md
+PORTFOLIO_README.md
+OpenCode.md

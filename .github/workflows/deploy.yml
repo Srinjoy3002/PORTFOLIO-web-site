@@ -1,0 +1,32 @@
+name: Deploy Portfolio
+on:
+  push:
+    branches:
+      - main  # or 'master' depending on your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Inject Firebase Secrets
+        run: |
+          sed -i "s/FB_API_KEY/${{ secrets.FB_API_KEY }}/g" index_v2.html
+          sed -i "s/FB_AUTH_DOMAIN/${{ secrets.FB_AUTH_DOMAIN }}/g" index_v2.html
+          sed -i "s/FB_DATABASE_URL/${{ secrets.FB_DATABASE_URL }}/g" index_v2.html
+          sed -i "s/FB_PROJECT_ID/${{ secrets.FB_PROJECT_ID }}/g" index_v2.html
+          sed -i "s/FB_STORAGE_BUCKET/${{ secrets.FB_STORAGE_BUCKET }}/g" index_v2.html
+          sed -i "s/FB_MESSAGING_SENDER_ID/${{ secrets.FB_MESSAGING_SENDER_ID }}/g" index_v2.html
+          sed -i "s/FB_APP_ID/${{ secrets.FB_APP_ID }}/g" index_v2.html
+          
+          # Rename index_v2 to index.html for GitHub Pages
+          cp index_v2.html index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
