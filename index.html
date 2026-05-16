@@ -1443,7 +1443,7 @@
 
         try {
             console.log("=== FIREBASE DIAGNOSTIC ===");
-            const isPlaceholder = (val) => val === "" || val.includes("FB_") || val.includes("PLACEHOLDER");
+            const isPlaceholder = (val) => val === "" || val.includes("__FB_") || val.includes("PLACEHOLDER");
             
             const injected = !isPlaceholder(firebaseConfig.apiKey);
             console.log("API Key Injected:", injected);
