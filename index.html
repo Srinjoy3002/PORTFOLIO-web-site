@@ -1428,23 +1428,29 @@
         // FIREBASE CONFIGURATION
         // ========================================
         const firebaseConfig = {
-            apiKey: "",
-            authDomain: "",
-            databaseURL: "",
-            projectId: "",
-            storageBucket: "",
-            messagingSenderId: "",
-            appId: ""
+            apiKey: "AIzaSyDpjUw54ZNeq8Iuh5q_7ecqgNNcRvuq8d8",
+            authDomain: "srinjoy-portfolio.firebaseapp.com",
+            databaseURL: "https://srinjoy-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "srinjoy-portfolio",
+            storageBucket: "srinjoy-portfolio.firebasestorage.app",
+            messagingSenderId: "1073488416549",
+            appId: "1:1073488416549:web:50ba940d2fa8d1aa3fd4cc"
         };
 
         // Initialize Firebase with Safety Try-Catch
         let database;
         try {
+            // Diagnostic Logs (Safe: Only logs status/length, not the actual secret)
+            console.log("Firebase Injection Check:");
+            console.log("- API Key Injected:", firebaseConfig.apiKey !== "AIzaSyDpjUw54ZNeq8Iuh5q_7ecqgNNcRvuq8d8");
+            console.log("- DB URL Injected:", firebaseConfig.databaseURL !== "https://srinjoy-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            console.log("- DB URL Value:", firebaseConfig.databaseURL); // Helpful to see if it's the right region URL
+
             firebase.initializeApp(firebaseConfig);
             database = firebase.database();
-            console.log("Firebase initialized.");
+            console.log("Firebase initialized successfully.");
         } catch (e) {
-            console.warn("Firebase failed to initialize.", e);
+            console.warn("Firebase failed to initialize. Check your GitHub Secrets.", e);
         }
 
         // ========================================
