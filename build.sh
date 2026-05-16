@@ -8,4 +8,11 @@ sed -i "s|V_STORAGE_BUCKET|$V_STORAGE_BUCKET|g" index.html
 sed -i "s|V_MESSAGING_SENDER_ID|$V_MESSAGING_SENDER_ID|g" index.html
 sed -i "s|V_APP_ID|$V_APP_ID|g" index.html
 
-echo "Build complete: Secrets injected into index.html"
+# Create the public directory Vercel is looking for
+mkdir -p public
+
+# Move files to the output directory
+cp index.html public/index.html
+cp Srinjoy_Tambuli_CV.pdf public/ || true
+
+echo "Build complete: Files moved to /public directory"
