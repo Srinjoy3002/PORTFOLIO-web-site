@@ -14,17 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Inject Firebase Secrets
+      - name: Prepare Deployment Files
         run: |
-          # Use | as delimiter to avoid URL slash conflicts
-          sed -i "s|__FB_API_KEY__|${{ secrets.FB_API_KEY }}|g" index.html
-          sed -i "s|__FB_AUTH_DOMAIN__|${{ secrets.FB_AUTH_DOMAIN }}|g" index.html
-          sed -i "s|__FB_DATABASE_URL__|${{ secrets.FB_DATABASE_URL }}|g" index.html
-          sed -i "s|__FB_PROJECT_ID__|${{ secrets.FB_PROJECT_ID }}|g" index.html
-          sed -i "s|__FB_STORAGE_BUCKET__|${{ secrets.FB_STORAGE_BUCKET }}|g" index.html
-          sed -i "s|__FB_MESSAGING_SENDER_ID__|${{ secrets.FB_MESSAGING_SENDER_ID }}|g" index.html
-          sed -i "s|__FB_APP_ID__|${{ secrets.FB_APP_ID }}|g" index.html
-          
           # Create a clean deployment directory
           mkdir deploy
           cp index.html deploy/index.html

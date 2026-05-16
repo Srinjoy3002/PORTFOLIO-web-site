@@ -1428,13 +1428,13 @@
         // FIREBASE CONFIGURATION
         // ========================================
         const firebaseConfig = {
-            apiKey: "__FB_API_KEY__",
-            authDomain: "__FB_AUTH_DOMAIN__",
-            databaseURL: "__FB_DATABASE_URL__",
-            projectId: "__FB_PROJECT_ID__",
-            storageBucket: "__FB_STORAGE_BUCKET__",
-            messagingSenderId: "__FB_MESSAGING_SENDER_ID__",
-            appId: "__FB_APP_ID__"
+            apiKey: "AIzaSyDpjUw54ZNeq8Iuh5q_7ecqgNNcRvuq8d8",
+            authDomain: "srinjoy-portfolio.firebaseapp.com",
+            databaseURL: "https://srinjoy-portfolio-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "srinjoy-portfolio",
+            storageBucket: "srinjoy-portfolio.firebasestorage.app",
+            messagingSenderId: "1073488416549",
+            appId: "1:1073488416549:web:50ba940d2fa8d1aa3fd4cc"
         };
 
         // Initialize Firebase with Safety Try-Catch
@@ -1442,21 +1442,9 @@
         const statusEl = document.querySelector('.loading-status');
 
         try {
-            console.log("=== FIREBASE DIAGNOSTIC ===");
-            const isPlaceholder = (val) => val === "" || val.includes("__FB_") || val.includes("PLACEHOLDER");
-            
-            const injected = !isPlaceholder(firebaseConfig.apiKey);
-            console.log("API Key Injected:", injected);
-            console.log("Database URL:", firebaseConfig.databaseURL);
-
-            if (injected) {
-                firebase.initializeApp(firebaseConfig);
-                database = firebase.database();
-                console.log("Firebase status: Initialized.");
-            } else {
-                if(statusEl) statusEl.innerHTML = "⚠️ Configuration error: GitHub Secrets not detected.";
-                console.warn("Firebase credentials missing. Site running in static mode.");
-            }
+            firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+            console.log("Firebase status: Connected.");
         } catch (e) {
             if(statusEl) statusEl.innerHTML = "⚠️ Connection failed. Check Console (F12).";
             console.error("Firebase Initialization Error:", e);
